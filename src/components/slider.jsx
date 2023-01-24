@@ -28,6 +28,7 @@ export default class Slider extends Component {
             showPlayButton={false}
             autoPlay={true}
             showFullscreenButton={false}
+            slideInterval={10000}
         />
       );
   }

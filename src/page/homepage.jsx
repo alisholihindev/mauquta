@@ -1,10 +1,10 @@
 import logo from '../assets/mosque.png'
 import Clock from '../components/clock'
 import Slider from '../components/slider'
-import * as Unicons from '@iconscout/react-unicons';
 import { useState, useEffect } from 'react';
 import moment from 'moment/moment';
 import Sholat from '../components/sholat';
+import Hadits from '../components/hadits';
 
 
  const Homepage = () => {
@@ -14,7 +14,7 @@ import Sholat from '../components/sholat';
   
   function refreshClock() {
     setDate(new Date());
-    if(date.toTimeString == '00:00'){
+    if(date.getHours() == '00' && date.getMinutes() == '01' && date.getSeconds() == '00'){
       setNewDay(true);
     }
   }
@@ -58,14 +58,7 @@ import Sholat from '../components/sholat';
               </div>
                 <Clock date={date}/>
               <div className='bg-white mx-10 py-5 rounded'>
-                <div className="flex flex-col items-center gap-2">
-                    <p className="text-center text-primary text-5xl">Penajam</p>
-                    <div className="text-center text-primary text-8xl">
-                      <Unicons.UilCloudSun size="190" className="color-primary"/>
-                    </div>
-                    <p className="text-center text-primary text-3xl">27° C</p>
-                    <p className="text-center text-primary text-5xl">Sunny</p>
-                </div>
+                <Hadits/>
               </div>
             </div>
           </div>
