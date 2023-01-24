@@ -1,1 +1,3 @@
-# mauquta
+# MAUQUTA
+
+Muslim prayer times.
