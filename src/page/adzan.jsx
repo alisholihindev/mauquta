@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Adzan = () => {
+  const {sholat} = useParams();
+
   const [showText, setShowtext] = useState(true);
   const [time, setTime] = useState(new Date());
   const [now, setNow] = useState(new Date());
@@ -37,7 +40,7 @@ const Adzan = () => {
         <div className="flex h-screen">
           <div className="m-auto">
             <div className="text-white text-center text-9xl" style={{  opacity: showText ? 0 : 1 }}>ADZAN</div>
-            <p className="text-white text-center text-9xl" style={{  opacity: showText ? 0 : 1 }}>MAGHRIB</p>
+            <p className="text-white text-center text-9xl uppercase" style={{  opacity: showText ? 0 : 1 }}>{sholat}</p>
           </div>
         </div>
     </div>

@@ -8,11 +8,31 @@ const Sholat = ({sholat}) => {
 
         const minutes = String(time.getMinutes()).padStart(2, "0"); 
         const hour = String(time.getHours()).padStart(2, "0"); 
-
+        
+        if('13:31' === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/dzuhur');
+        }
         
         if(sholat?.dzuhur === `${hour}:${minutes}`){
             // console.log('Adzan');
-            window.location.assign('/adzan');
+            window.location.assign('/adzan/dzuhur');
+        }
+        if(sholat?.subuh === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/subuh');
+        }
+        if(sholat?.ashar === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/ashar');
+        }
+        if(sholat?.maghrib === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/maghrib');
+        }
+        if(sholat?.isya === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/isya');
         }
     }
 

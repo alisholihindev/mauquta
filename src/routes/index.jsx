@@ -9,7 +9,7 @@ const MyRoutes = () => {
     return(
         <Routes>
             <Route path="/" element={<Homepage/>} />
-            <Route path="/adzan" element={<Adzan/>} />
+            <Route path="/adzan/:sholat" element={<Adzan/>} />
             <Route path="/iqomah" element={<Iqomah/>} />
         </Routes>
     )
