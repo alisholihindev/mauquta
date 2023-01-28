@@ -37,8 +37,8 @@ const Iqomah = () => {
   const [time, setTime] = useState(new Date());
   const stratTimes= Date.now(); // use UNIX timestamp in seconds
   const stratTime = stratTimes / 1000; // use UNIX timestamp in seconds
-  const endTime = stratTime + parseInt(timer); // use UNIX timestamp in seconds
-  const [endTimer, setEndTime] = useState(moment(stratTimes).add(parseInt(timer), 's').toDate());
+  const endTime = stratTime + Number(timer); // use UNIX timestamp in seconds
+  const [endTimer, setEndTime] = useState(moment(stratTimes).add(Number(timer)/60, 'm').toDate());
 
   const remainingTime = endTime - stratTime;
   const days = Math.ceil(remainingTime / daySeconds);
@@ -46,13 +46,6 @@ const Iqomah = () => {
   
   function refreshClock() {
     setTime(new Date());
-    
-    console.log(moment(time).format('HH:mm:ss'));
-    console.log(moment(endTimer).format('HH:mm:ss'));
-    
-    if(moment(time).format('HH:mm:ss') == moment(endTimer).format('HH:mm:ss')){
-      window.location.assign('/');
-    }
   }
 
   useEffect(() => {
@@ -60,7 +53,17 @@ const Iqomah = () => {
     return function cleanup() {
       clearInterval(timerId);
     };
-  }, [time]);
+  }, []);
+
+  useEffect(() => {
+    console.log(moment(time).format('HH:mm:ss'));
+    console.log(moment(endTimer).format('HH:mm:ss'));
+    // console.log(remainingTime);
+    
+    if(moment(time).format('HH:mm:ss') == moment(endTimer).format('HH:mm:ss')){
+      window.location.assign('/');
+    }
+  },[time]);
 
 
   return (
@@ -111,7 +114,7 @@ const Iqomah = () => {
                 size={180}
                 initialRemainingTime={remainingTime % minuteSeconds}
                 onComplete={(totalElapsedTime) => ({
-                  shouldRepeat: remainingTime - totalElapsedTime > 0
+                  shouldRepeat: remainingTime - totalElapsedTime > -1
                 })}
               >
                 {({ elapsedTime, color }) => (
