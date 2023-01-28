@@ -38,7 +38,7 @@ const Iqomah = () => {
   const stratTimes= Date.now(); // use UNIX timestamp in seconds
   const stratTime = stratTimes / 1000; // use UNIX timestamp in seconds
   const endTime = stratTime + parseInt(timer); // use UNIX timestamp in seconds
-  const [endTimer, setEndTime] = useState(moment(stratTimes).add(5, 'm').toDate());
+  const [endTimer, setEndTime] = useState(moment(stratTimes).add(parseInt(timer), 's').toDate());
 
   const remainingTime = endTime - stratTime;
   const days = Math.ceil(remainingTime / daySeconds);
@@ -47,10 +47,10 @@ const Iqomah = () => {
   function refreshClock() {
     setTime(new Date());
     
-    console.log(time);
-    console.log(endTimer);
+    console.log(moment(time).format('HH:mm:ss'));
+    console.log(moment(endTimer).format('HH:mm:ss'));
     
-    if(moment(time).format('h:mm a') == moment(endTimer).format('h:mm a')){
+    if(moment(time).format('HH:mm:ss') == moment(endTimer).format('HH:mm:ss')){
       window.location.assign('/');
     }
   }
