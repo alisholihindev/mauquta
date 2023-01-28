@@ -11,6 +11,26 @@ import Hadits from '../components/hadits';
   const [sholat, setSholat] = useState(null);
   const [date, setDate] = useState(new Date());
   const [newDay, setNewDay] = useState(true);
+  const [profile, setProfile] = useState();
+  const [kota, setKota] = useState(2307);
+  const [slider, setSlider] = useState([]);
+
+  const getData=()=>{
+    fetch('/data/data.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    ).then(res => {
+      return res.json();
+    }).then(data =>{
+      setProfile(data.profile);
+      setKota(profile?.kota_id);
+      setSlider(data.images);
+    })
+  }
   
   function refreshClock() {
     setDate(new Date());
@@ -20,6 +40,7 @@ import Hadits from '../components/hadits';
   }
 
   useEffect(() => {
+    getData();
     const timerId = setInterval(refreshClock, 1000);
     return function cleanup() {
       clearInterval(timerId);
@@ -27,7 +48,7 @@ import Hadits from '../components/hadits';
   }, []);
 
   useEffect(() => {
-    fetch('https://api.myquran.com/v1/sholat/jadwal/2307/'+moment(date).format('YYYY/MM/DD'))
+    fetch('https://api.myquran.com/v1/sholat/jadwal/'+kota+'/'+moment(date).format('YYYY/MM/DD'))
       .then(res => {
         return res.json();
       }).then(data =>{
@@ -35,7 +56,9 @@ import Hadits from '../components/hadits';
         setNewDay(false);
       })
     
-  },[newDay])
+  },[newDay,profile])
+
+  
 
 
   return (
@@ -44,7 +67,7 @@ import Hadits from '../components/hadits';
           <div className="col-span-9">
             <div className='flex flex-col'>
               <div className='container'>
-                <Slider/>
+                <Slider slider={slider}/>
               </div>
               <Sholat sholat={sholat}/>
             </div>
@@ -53,8 +76,8 @@ import Hadits from '../components/hadits';
             <div className="flex flex-col justify-center gap-10 pt-10">
               <div className='flex flex-col items-center gap-2'>
                 <img src={ logo } alt="" className='w-40'/>
-                <p className="text-center text-5xl">Masjid Nurul Yaqin</p>
-                <p className="text-center text-md">Jl.gama Rt.02 Kel. Sesumpu, Kec. Penajam,<br /> Kab. Penajam Paser Utara</p>
+                <p className="text-center text-5xl">{profile?.nama}</p>
+                <p className="text-center text-md">{profile?.alamat}<br /> {profile?.kota}</p>
               </div>
                 <Clock date={date}/>
               <div className='bg-white mx-10 py-5 rounded'>

@@ -1,26 +1,3 @@
-# MAUQUTA
-
-> Jam waktu sholat untuk Masjid.
-
-## Deployed in: https://mauquta.vercel.app/
-
-## Stacks
-- ReactJS
-- Tailwind
-## Build Setup
-1. Clone repository
-`$ git clone https://github.com/alisholihindev/mauquta.git`
-
-2. Install depedencies
-```bash
-# with npm
-$ npm install
-# or with yarn
-$ yarn install
-```
-
-3. Edit data.json
-```json
 {
     "profile" : {
         "nama" : "Masjid Nurul Yaqin",
@@ -50,19 +27,3 @@ $ yarn install
           }
     ]
 }
-```
->-Penentuan timer iqomah mengugunakan satuan detik
->-Untuk mendapatkan kota_id silahkan buka `https://api.myquran.com/v1/sholat/kota/cari/nama_kotamu`
-
-4. Available scripts
-```bash
-# start development server
-$ npm run dev
-# built to production mode
-$ npm run build
-```
-### LICENSE
-MIT
-
----
-Copyright © 2023 by Ali Sholihin

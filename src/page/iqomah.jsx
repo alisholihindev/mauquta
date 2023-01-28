@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useParams } from "react-router-dom";
 
 import "../index.css";
 import { useEffect } from "react";
@@ -32,10 +33,11 @@ const getTimeDays = (time) => (time / daySeconds) | 0;
 
 
 const Iqomah = () => {
+  const {timer} = useParams();
   const [time, setTime] = useState(new Date());
   const stratTimes= Date.now(); // use UNIX timestamp in seconds
   const stratTime = stratTimes / 1000; // use UNIX timestamp in seconds
-  const endTime = stratTime + 300; // use UNIX timestamp in seconds
+  const endTime = stratTime + parseInt(timer); // use UNIX timestamp in seconds
   const [endTimer, setEndTime] = useState(moment(stratTimes).add(5, 'm').toDate());
 
   const remainingTime = endTime - stratTime;

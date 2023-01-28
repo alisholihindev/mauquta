@@ -7,6 +7,7 @@ const Adzan = () => {
   const [showText, setShowtext] = useState(true);
   const [time, setTime] = useState(new Date());
   const [now, setNow] = useState(new Date());
+  const [iqomah, setIqomah] = useState();
 
   const minutes = String(now.getMinutes()+1).padStart(2, "0"); 
   const hours = String(now.getHours()).padStart(2, "0"); 
@@ -22,8 +23,27 @@ const Adzan = () => {
     // console.log(`${hours}:${minutes}`);
 
     if(`${hourNow}:${minutesNow}` === `${hours}:${minutes}`){
-        console.log('Adzan');
-        window.location.assign('/iqomah');
+        switch (sholat) {
+          case "subuh":
+            window.location.assign('/iqomah/'+iqomah.subuh);
+            break;
+          case "dzuhur":
+            window.location.assign('/iqomah/'+iqomah.dzuhur);
+            break;
+          case "ashar":
+            window.location.assign('/iqomah/'+iqomah.ashar);
+            break;
+          case "maghrib":
+            window.location.assign('/iqomah/'+iqomah.maghrib);
+            break;
+          case "isya":
+            window.location.assign('/iqomah/'+iqomah.isya);
+            break;
+        
+          default:
+            window.location.assign('/');
+            break;
+        }
     }
   }
 
@@ -33,13 +53,32 @@ const Adzan = () => {
       clearInterval(timerId);
     };
   },[showText]);
+
+  useEffect(() => {
+    fetch('/data/data.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    ).then(res => {
+      return res.json();
+    }).then(data =>{
+      setIqomah(data?.timer_iqomah)
+    });
+  },[]);
   
 
   return (
     <div>
         <div className="flex h-screen">
           <div className="m-auto">
-            <div className="text-white text-center text-9xl" style={{  opacity: showText ? 0 : 1 }}>ADZAN</div>
+            
+              {
+                sholat == "imsak" || sholat == "syuruq" && 
+                <div className="text-white text-center text-9xl" style={{  opacity: showText ? 0 : 1 }}>ADZAN</div>
+              }
             <p className="text-white text-center text-9xl uppercase" style={{  opacity: showText ? 0 : 1 }}>{sholat}</p>
           </div>
         </div>

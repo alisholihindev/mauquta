@@ -9,11 +9,19 @@ const Sholat = ({sholat}) => {
         const minutes = String(time.getMinutes()).padStart(2, "0"); 
         const hour = String(time.getHours()).padStart(2, "0"); 
         
-        if('13:31' === `${hour}:${minutes}`){
+        if('11:27' === `${hour}:${minutes}`){
             // console.log('Adzan');
             window.location.assign('/adzan/dzuhur');
         }
-        
+
+        if(sholat?.imsak === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/imsak');
+        }
+        if(sholat?.terbit === `${hour}:${minutes}`){
+            // console.log('Adzan');
+            window.location.assign('/adzan/syuruq');
+        }
         if(sholat?.dzuhur === `${hour}:${minutes}`){
             // console.log('Adzan');
             window.location.assign('/adzan/dzuhur');
