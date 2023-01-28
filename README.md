@@ -51,8 +51,7 @@ $ yarn install
     ]
 }
 ```
->-Penentuan timer iqomah mengugunakan satuan detik
->-Untuk mendapatkan kota_id silahkan buka `https://api.myquran.com/v1/sholat/kota/cari/nama_kotamu`
+>-Penentuan timer iqomah mengugunakan satuan detik dan untuk mendapatkan kota_id silahkan buka `https://api.myquran.com/v1/sholat/kota/cari/nama_kotamu`
 
 4. Available scripts
 ```bash
